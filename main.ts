@@ -18,7 +18,7 @@ function showRandomJoke() {
             }
             return res.json()
         })
-        .then((data : Object) => {
+        .then((data) => {
             jokeP?.innerText = data.joke
         })
         .catch((e) => console.log(e))

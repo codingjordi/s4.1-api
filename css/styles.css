@@ -1,0 +1,44 @@
+@charset "UTF-8";
+@import '../node_modules/bootstrap/dist/css/bootstrap.css';
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+body {
+  display: grid;
+  margin: 0 auto;
+  height: 100vh;
+  place-items: center;
+  text-align: center;
+  background: rgb(238, 174, 202);
+  background: radial-gradient(circle, rgb(238, 174, 202) 0%, rgb(148, 187, 233) 100%);
+  font-family: "Inter", sans-serif;
+}
+
+#random-joke {
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container > div {
+  backdrop-filter: blur(10px); /* Aumenta el valor para más desenfoque */
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.264); /* Fondo blanco con transparencia */
+  padding: 2rem; /* Ajusta el padding según sea necesario */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra opcional para resaltar el contenedor */
+}
+
+.btn-primary {
+  font-weight: bold;
+  background-color: #71a1d8;
+  border: transparent;
+}
+.btn-primary:hover {
+  background-color: #558fd2;
+  border: transparent;
+}
+.btn-primary:active {
+  background: radial-gradient(circle, rgb(148, 187, 233) 0%, rgb(238, 174, 202) 100%);
+  border: transparent;
+}
+
+/*# sourceMappingURL=styles.css.map */

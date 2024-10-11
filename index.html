@@ -5,15 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Random Joke >.<</title>
     <link rel="shortcut icon" href="public/favicon.png.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/styles.css">
     <script src="main.js"></script>
 </head>
 <body onload="showRandomJoke()">
     <div class="container">
-        <h1>Are you ready to laugh? 🤣</h1>
-        <div id="joke-container">
-            <p id="random-joke"></p>
-            <button onclick="showRandomJoke()">Next joke</button>
+        <div class="pt-5">
+            <h1 class="fw-bold">Are you ready to laugh? <span class="text-secondary fw-light fst-italic">Cause you won't...</span></h1>
+            <div id="joke-container">
+                <p class="text-nowrap fs-5" id="random-joke"></p>
+                <button class="btn btn-primary" onclick="showRandomJoke()">Next joke</button>
+            </div>
         </div>
     </div>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
