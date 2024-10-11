@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Joke >.<</title>
+    <title>Unfunny Random Jokes Generator   </title>
     <link rel="shortcut icon" href="public/favicon.png.png" type="image/x-icon">
     <link rel="stylesheet" href="css/styles.css">
     <script src="main.js"></script>
@@ -11,12 +11,21 @@
 <body onload="showRandomJoke()">
     <div class="container">
         <div class="pt-5">
-            <h1 class="fw-bold">Are you ready to laugh? <span class="text-secondary fw-light fst-italic">Cause you won't...</span></h1>
+            <h1 class="fw-bold">Are you ready to laugh? <span class="text-secondary fw-light fst-italic">'Cause you probably won't...</span></h1>
             <div id="joke-container">
-                <p class="text-nowrap fs-5" id="random-joke"></p>
-                <button class="btn btn-primary" onclick="showRandomJoke()">Next joke</button>
+                <p class="fs-5" id="random-joke"></p>
             </div>
+            <div class="rating-container d-flex justify-content-center gap-5">
+                <button class="emoji-button laugh" aria-label="Puntuación alta" onclick="rateJoke(3)"></button>
+                <button class="emoji-button neutral" aria-label="Puntuación media" onclick="rateJoke(2)"></button>
+                <button class="emoji-button unfunny" aria-label="Puntuación baja" onclick="rateJoke(1)"></button>
+            </div>
+            <button class="btn btn-primary mt-5" onclick="showRandomJoke()">Next joke</button>
+            <div id="vote-modal" class="modal hidden">
+                <p class="fw-bold fs-3">Votación enviada!</p>
+            </div>                      
         </div>
+         
     </div>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>

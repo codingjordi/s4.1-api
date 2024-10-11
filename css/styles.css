@@ -1,6 +1,11 @@
-@charset "UTF-8";
 @import '../node_modules/bootstrap/dist/css/bootstrap.css';
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+*, *::after, *::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   display: grid;
   margin: 0 auto;
@@ -12,6 +17,40 @@ body {
   font-family: "Inter", sans-serif;
 }
 
+button {
+  background: none;
+  border: none;
+}
+
+.emoji-button {
+  height: 100px;
+  width: 100px;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.emoji-button.laugh {
+  position: relative;
+  background-image: url("/public/laughing-crying-emoji.png");
+}
+.emoji-button.laugh:hover {
+  background-image: url("/public/rolling-on-the-floor-laughin-emoji.png");
+}
+
+.emoji-button.neutral {
+  background-image: url("/public/neutral-face-emoji.png");
+}
+.emoji-button.neutral:hover {
+  background-image: url("/public/grinning-face-with-sweat-emoji.png");
+}
+
+.emoji-button.unfunny {
+  background-image: url("/public/nauseated-emoji.png");
+}
+.emoji-button.unfunny:hover {
+  background-image: url("/public/face-vomiting-emoji.png");
+}
+
 #random-joke {
   min-height: 100px;
   display: flex;
@@ -20,11 +59,11 @@ body {
 }
 
 .container > div {
-  backdrop-filter: blur(10px); /* Aumenta el valor para más desenfoque */
+  backdrop-filter: blur(10px);
   border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.264); /* Fondo blanco con transparencia */
-  padding: 2rem; /* Ajusta el padding según sea necesario */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra opcional para resaltar el contenedor */
+  background-color: rgba(255, 255, 255, 0.264);
+  padding: 2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .btn-primary {
@@ -39,6 +78,28 @@ body {
 .btn-primary:active {
   background: radial-gradient(circle, rgb(148, 187, 233) 0%, rgb(238, 174, 202) 100%);
   border: transparent;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1rem 2rem;
+  color: black;
+  backdrop-filter: blur(3px);
+  border-radius: 5px;
+  text-align: center;
+  display: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: grid;
+  place-items: center;
 }
 
 /*# sourceMappingURL=styles.css.map */
