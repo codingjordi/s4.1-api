@@ -1,16 +1,53 @@
 let reportAcudits : Array<{joke: String, score: Number, date: String}> = [] ;
 let currentJoke = '';
+let currentWeather;
 
-const options : Object = {
-    method: 'GET',
-    headers: {
-        'Accept': 'application/json'
-    }
+
+
+function showWeather() {
+    const weatherP = document.getElementById('weather-temperature') 
+    const weatherIcon = document.getElementById('weather-icon')
+
+    const apiURL = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Barcelona,ES/today?key=7VP4W48VEUSM3PFTTSAXLLNHD'
+
+    fetch(apiURL)
+        .then((res) => {
+            if(!res.ok) {
+                throw new Error("Something went wrong and we couldn't retrieve the weather forecast")
+            }
+            return res.json()
+         }) 
+        .then((data) => {
+            currentWeather = data;
+            console.log(data)
+            weatherP?.textContent = parseInt(fahrenheitToCelsius(data.days[0].temp)) + 'ºC'
+            if(data.days[0].conditions.includes('Rain')) {
+                weatherIcon.src = './public/heavy-rain.png'
+            }
+            if(data.days[0].conditions.includes('Partially')) {
+                weatherIcon.src = './public/partially-cloud.png'
+            }
+            if(data.days[0].conditions.includes('Clear')) {
+                weatherIcon.src = './public/sunny.png'
+            }
+        })
 }
 
-const apiURL = 'https://icanhazdadjoke.com/';
+function fahrenheitToCelsius(fahrenheitTemp : Number ) {
+    let celsius = (fahrenheitTemp - 32) * 5 / 9;
+    return celsius;
+  }
 
 function showRandomJoke() {
+
+    const options : Object = {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json'
+        }
+    }
+    
+    const apiURL = 'https://icanhazdadjoke.com/';
 
     const jokeP = document.getElementById('random-joke')
 
@@ -46,15 +83,15 @@ function rateJoke(points: Number) {
     if (jokeToRate) {
         jokeToRate.score = points;
         console.log(reportAcudits);
-        showVoteModal(); // Muestra el modal al votar
+        showVoteModal();
     }
 }
 
 
 function showVoteModal() {
     const modal = document.getElementById('vote-modal');
-    modal?.classList.add('show'); // Muestra el modal
+    modal?.classList.add('show'); 
     setTimeout(() => {
-        modal?.classList.remove('show'); // Lo oculta después de 1.5 segundos
+        modal?.classList.remove('show');
     }, 1500);
 }
