@@ -1,25 +1,36 @@
 let reportAcudits : Array<{joke: String, score: Number, date: String}> = [] ;
 let currentJoke = '';
 let currentWeather;
+let counter = 0;
 
 
+function showRandomJoke() {
 
-function showWeather() {
+    if(counter % 2 === 0) {
+        showRandomChuckNorrisJoke();
+        counter++;
+    } else {
+        showRandomDadJoke();
+        counter++;
+    }
+}
+
+
+function showWeather() : void {
     const weatherP = document.getElementById('weather-temperature') 
     const weatherIcon = document.getElementById('weather-icon')
 
     const apiURL = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Barcelona,ES/today?key=7VP4W48VEUSM3PFTTSAXLLNHD'
 
     fetch(apiURL)
-        .then((res) => {
+        .then((res : Response) => {
             if(!res.ok) {
                 throw new Error("Something went wrong and we couldn't retrieve the weather forecast")
             }
             return res.json()
          }) 
-        .then((data) => {
+        .then((data : Object) => {
             currentWeather = data;
-            console.log(data)
             weatherP?.textContent = parseInt(fahrenheitToCelsius(data.days[0].temp)) + 'ºC'
             if(data.days[0].conditions.includes('Rain')) {
                 weatherIcon.src = './public/heavy-rain.png'
@@ -33,12 +44,12 @@ function showWeather() {
         })
 }
 
-function fahrenheitToCelsius(fahrenheitTemp : Number ) {
+function fahrenheitToCelsius(fahrenheitTemp : Number ) : Number  {
     let celsius = (fahrenheitTemp - 32) * 5 / 9;
     return celsius;
   }
 
-function showRandomJoke() {
+function showRandomDadJoke() {
 
     const options : Object = {
         method: 'GET',
@@ -55,7 +66,7 @@ function showRandomJoke() {
     fetch(apiURL, options)
         .then((res) => {
             if (!res.ok) {
-                throw new Error("Something went wrong and it couldn't retrieve the joke.... And that's not fun :-(")
+                throw new Error("Something went wrong and it couldn't retrieve a dad joke.... And that's not fun :-(")
             }
             return res.json()
         })
@@ -75,6 +86,36 @@ function showRandomJoke() {
 }
 
 
+function showRandomChuckNorrisJoke() {
+    
+    const apiURL = 'https://api.chucknorris.io/jokes/random';
+
+    const jokeP = document.getElementById('random-joke')
+
+    
+    fetch(apiURL)
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error("Something went wrong and it couldn't retrieve a Chuck Norris joke.... And that's not fun :-(")
+            }
+            return res.json()
+        })
+        .then((data) => {
+            currentJoke = data.value
+            jokeP.innerText = currentJoke
+            
+            if(!reportAcudits.some((joke) => joke.joke === currentJoke)) {
+                reportAcudits.push({
+                    joke: data.value,
+                    score: 0,
+                    date: new Date().toISOString()
+                })
+            }
+        })
+        .catch((e) => console.log(e))
+}
+
+
 function rateJoke(points: Number) {
     const jokeToRate = reportAcudits.find(joke => {
         return joke.joke === currentJoke;
@@ -82,7 +123,6 @@ function rateJoke(points: Number) {
 
     if (jokeToRate) {
         jokeToRate.score = points;
-        console.log(reportAcudits);
         showVoteModal();
     }
 }

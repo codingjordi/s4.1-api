@@ -1,6 +1,17 @@
 var reportAcudits = [];
 var currentJoke = '';
 var currentWeather;
+var counter = 0;
+function showRandomJoke() {
+    if (counter % 2 === 0) {
+        showRandomChuckNorrisJoke();
+        counter++;
+    }
+    else {
+        showRandomDadJoke();
+        counter++;
+    }
+}
 function showWeather() {
     var weatherP = document.getElementById('weather-temperature');
     var weatherIcon = document.getElementById('weather-icon');
@@ -31,7 +42,7 @@ function fahrenheitToCelsius(fahrenheitTemp) {
     var celsius = (fahrenheitTemp - 32) * 5 / 9;
     return celsius;
 }
-function showRandomJoke() {
+function showRandomDadJoke() {
     var options = {
         method: 'GET',
         headers: {
@@ -43,7 +54,7 @@ function showRandomJoke() {
     fetch(apiURL, options)
         .then(function (res) {
         if (!res.ok) {
-            throw new Error("Something went wrong and it couldn't retrieve the joke.... And that's not fun :-(");
+            throw new Error("Something went wrong and it couldn't retrieve a dad joke.... And that's not fun :-(");
         }
         return res.json();
     })
@@ -53,6 +64,28 @@ function showRandomJoke() {
         if (!reportAcudits.some(function (joke) { return joke.joke === currentJoke; })) {
             reportAcudits.push({
                 joke: data.joke,
+                score: 0,
+                date: new Date().toISOString()
+            });
+        }
+    })["catch"](function (e) { return console.log(e); });
+}
+function showRandomChuckNorrisJoke() {
+    var apiURL = 'https://api.chucknorris.io/jokes/random';
+    var jokeP = document.getElementById('random-joke');
+    fetch(apiURL)
+        .then(function (res) {
+        if (!res.ok) {
+            throw new Error("Something went wrong and it couldn't retrieve a Chuck Norris joke.... And that's not fun :-(");
+        }
+        return res.json();
+    })
+        .then(function (data) {
+        currentJoke = data.value;
+        jokeP.innerText = currentJoke;
+        if (!reportAcudits.some(function (joke) { return joke.joke === currentJoke; })) {
+            reportAcudits.push({
+                joke: data.value,
                 score: 0,
                 date: new Date().toISOString()
             });
