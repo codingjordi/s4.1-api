@@ -8,6 +8,7 @@
     padding: 0;
 }
 
+
 body {
     display: grid;
     margin: 0 auto;
@@ -22,6 +23,11 @@ body {
 button {
     background: none;
     border: none;
+    
+    &:hover {
+        cursor: url('/public/pngwing.png'), auto;
+    }
+
 }
 
 .emoji-button {
@@ -126,5 +132,7 @@ button {
     font-weight: 600;
   }
 
-  #weather-cast {
+
+.custom-cursor {
+    cursor: url('/public/pngwing.png'), auto;
 }

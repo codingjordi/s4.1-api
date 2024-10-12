@@ -21,6 +21,9 @@ button {
   background: none;
   border: none;
 }
+button:hover {
+  cursor: url("/public/pngwing.png"), auto;
+}
 
 .emoji-button {
   height: 100px;
@@ -114,6 +117,10 @@ button {
   backdrop-filter: blur(10px);
   color: white;
   font-weight: 600;
+}
+
+.custom-cursor {
+  cursor: url("/public/pngwing.png"), auto;
 }
 
 /*# sourceMappingURL=styles.css.map */
